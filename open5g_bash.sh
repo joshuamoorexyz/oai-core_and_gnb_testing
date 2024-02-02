@@ -25,19 +25,16 @@ current_user=$(whoami)
 
 # Use tilde directly in cd
 
-folder_path=~/containerization
 
-if [ -d "$folder_path" ]; then
+if [ -d "~/containerization" ]; then
     echo "Folder exists. Skipping."
 else
     echo "Folder does not exist. Cloning repository."
-    git clone https://github.com/aayamrajshakya/containerization.git "$folder_path"
-    
-    if [ $? -ne 0 ]; then
-        echo "Error cloning repository. Exiting."
-        exit 1
-    fi
+    cd ~
+    git clone https://github.com/aayamrajshakya/containerization.git 
+
 fi
+folder_path=~/containerization
 
 cd "$folder_path"
 
@@ -73,7 +70,6 @@ DEBIAN_FRONTEND=noninteractive apt-get install --yes \
     libsctp1 \
     librtmp1 \
     libpsl5 \
-    sudo \
     libmysqlclient2? \
     libsqlite3-0 \
     libcurl4-gnutls-dev \
@@ -155,7 +151,18 @@ ldconfig
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Europe/Paris
 
-# Update and upgrade packages
+# Update and upgrade packagescd ../../..
+cd ausf/build/scripts
+# Installing all the needed libraries/packages to build and run AUSF
+apt-get update
+apt-get upgrade -y
+apt-get install -y libidn2-0-dev
+./build_ausf --install-deps --force
+ldconfig
+
+#Building AUSF
+./build_ausf --clean --Verbose --build-type Release --jobs && ldconfig
+
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes
 
@@ -180,7 +187,18 @@ rm -rf /var/lib/apt/lists/*
 
 ###### BUILD IMS IMAGE #########################
 
-# Set environment variable
+# Set environment variablecd ../../..
+cd ausf/build/scripts
+# Installing all the needed libraries/packages to build and run AUSF
+apt-get update
+apt-get upgrade -y
+apt-get install -y libidn2-0-dev
+./build_ausf --install-deps --force
+ldconfig
+
+#Building AUSF
+./build_ausf --clean --Verbose --build-type Release --jobs && ldconfig
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Update and upgrade packages
@@ -205,7 +223,18 @@ export TZ=Europe/Paris
 export IS_DOCKERFILE=1
 
 # Update and upgrade packages
+apt-get updatecd ../../..
+cd ausf/build/scripts
+# Installing all the needed libraries/packages to build and run AUSF
 apt-get update
+apt-get upgrade -y
+apt-get install -y libidn2-0-dev
+./build_ausf --install-deps --force
+ldconfig
+
+#Building AUSF
+./build_ausf --clean --Verbose --build-type Release --jobs && ldconfig
+
 DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes
 
 # Install required packages
@@ -353,7 +382,7 @@ git config --global https.postBuffer 123289600
 git config --global https.maxRequestBuffer 123289600
 git config --global core.compression 0
 git config --global http.sslverify false
-
+ 4575 m
 #cd into UDM directory
 cd ../../..
 cd udm/build/scripts
@@ -480,7 +509,7 @@ rm -rf /var/lib/apt/lists/*
 
 ldconfig
 
-
+#COMMENT
 ###################### BUILD spgwu_tiny IMAGE #########################
 # Set environment variables
 export DEBIAN_FRONTEND=noninteractive
@@ -518,6 +547,8 @@ apt-get install -y \
     binutils-dev
 
 ./build_spgwu --install-deps --force
+./build_spgwu --clean --Verbose --build-type Release --jobs && ldconfig
+
 
 # Set environment variables
 export DEBIAN_FRONTEND=noninteractive
@@ -566,7 +597,6 @@ ldconfig
 
 # Run the startup script
 #/usr/src/app/startservices.sh
-
 
 
 
