@@ -4,6 +4,7 @@
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Europe/Paris
 
+
 # Install debug tools and mandatory libraries
 apt-get update
 apt-get upgrade --yes
@@ -23,6 +24,9 @@ apt-get install --yes \
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
+
+# move to trf dircetory
+cd ~/containerization/fed/ci-scripts
 
 # Copy entrypoint script
 cp trfgen_entrypoint.sh /tmp/
