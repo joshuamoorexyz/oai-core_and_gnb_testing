@@ -3,8 +3,7 @@
 # Set environment variables
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Europe/Paris
-git clone https://github.com/aayamrajshakya/containerization.git
-cd fed/ci-scripts/
+
 # Install debug tools and mandatory libraries
 apt-get update
 apt-get upgrade --yes
@@ -34,4 +33,3 @@ chmod +x /tmp/trfgen_entrypoint.sh
 
 # Keep the script running indefinitely
 sleep infinity
-
