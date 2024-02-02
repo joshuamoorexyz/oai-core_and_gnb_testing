@@ -603,4 +603,24 @@ ldconfig
 
 
 
+# Install MySQL server
+    
+sudo apt-get install -y mysql-server
+    
+    
+# Start MySQL service
+sudo service mysql start
+      
+  
+# Log in to MySQL and set root password
+sudo mysql -u root -e "FLUSH PRIVILEGES;"
+sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'linux';"
+  
+# Log in to MySQL to create a database
+sudo mysql -u root -e "create database oai_db;"
+
+# Import the provided SQL script
+cd ~/containerization/fed/docker-compose/database
+sudo mysql -u root oai_db < oai_db2.sql
+
 
