@@ -49,9 +49,11 @@ asterisk -fp
 #./spgwu_tiny/build/spgwu_tiny/build/spgwu_tiny -c /spgwu_tiny/etc/config.yaml -o
 ./spgwu_tiny/build/spgw_u/build/spgwu -c ./spgwu_tiny/etc/spgw_u.conf -o
 
-cd /usr/local/bin/
-chmod +x start_trf.sh
-./start_trf.sh
+
+chmod +x /usr/local/bin/start_trf.sh
+
+/usr/local/bin/start_trf.sh
+
 
 
 
