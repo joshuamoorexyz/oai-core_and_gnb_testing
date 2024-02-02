@@ -47,6 +47,7 @@ asterisk -fp
 
 #start spgwu
 #./spgwu_tiny/build/spgwu_tiny/build/spgwu_tiny -c /spgwu_tiny/etc/config.yaml -o
+./spgwu_tiny/build/spgw_u/build/spgwu -c ./spgwu_tiny/etc/spgw_u.conf -o
 
 
 
