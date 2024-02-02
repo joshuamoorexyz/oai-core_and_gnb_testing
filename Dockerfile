@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y sudo
 
 # Copy the bash script to the container
 COPY open5g_bash.sh /usr/local/bin/
+COPY start_trf.sh /usr/local/bin/
 
 # Set execute permissions on the script
 RUN chmod +x /usr/local/bin/open5g_bash.sh
