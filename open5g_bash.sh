@@ -140,7 +140,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install --yes \
   libcurl?-gnutls \
   librtmp1 \
   libpsl5 \
-  libboost-thread1.7?.0
+  libboost-thread1.7?.0 
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
@@ -151,20 +151,7 @@ ldconfig
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Europe/Paris
 
-# Update and upgrade packagescd ../../..
-cd ausf/build/scripts
-# Installing all the needed libraries/packages to build and run AUSF
-apt-get update
-apt-get upgrade -y
-apt-get install -y libidn2-0-dev
-./build_ausf --install-deps --force
-ldconfig
-
-#Building AUSF
-./build_ausf --clean --Verbose --build-type Release --jobs && ldconfig
-
-apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes
+DEBIAN_FRONTEND=noninteractive apt-get update --yes
 
 # Install debug tools and mandatory libraries
 DEBIAN_FRONTEND=noninteractive apt-get install --yes \
@@ -186,18 +173,6 @@ rm -rf /var/lib/apt/lists/*
 
 
 ###### BUILD IMS IMAGE #########################
-
-# Set environment variablecd ../../..
-cd ausf/build/scripts
-# Installing all the needed libraries/packages to build and run AUSF
-apt-get update
-apt-get upgrade -y
-apt-get install -y libidn2-0-dev
-./build_ausf --install-deps --force
-ldconfig
-
-#Building AUSF
-./build_ausf --clean --Verbose --build-type Release --jobs && ldconfig
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -221,19 +196,6 @@ rm -rf /var/lib/apt/lists/*
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Europe/Paris
 export IS_DOCKERFILE=1
-
-# Update and upgrade packages
-apt-get updatecd ../../..
-cd ausf/build/scripts
-# Installing all the needed libraries/packages to build and run AUSF
-apt-get update
-apt-get upgrade -y
-apt-get install -y libidn2-0-dev
-./build_ausf --install-deps --force
-ldconfig
-
-#Building AUSF
-./build_ausf --clean --Verbose --build-type Release --jobs && ldconfig
 
 DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes
 
@@ -382,7 +344,7 @@ git config --global https.postBuffer 123289600
 git config --global https.maxRequestBuffer 123289600
 git config --global core.compression 0
 git config --global http.sslverify false
- 4575 m
+
 #cd into UDM directory
 cd ../../..
 cd udm/build/scripts
@@ -592,19 +554,13 @@ ldconfig
 #support-multi-sgwu-instances="true"
 #support-nrf-fdqn="true"
 
-# Set the script as executable
-#chmod +x /usr/src/app/startservices.sh
-
-# Run the startup script
-#/usr/src/app/startservices.sh
-
-
 
 
 
 
 # Install MySQL server
-    
+#
+sudo apt-get update -y
 sudo apt-get install -y mysql-server
     
     
@@ -622,5 +578,4 @@ sudo mysql -u root -e "create database oai_db;"
 # Import the provided SQL script
 cd ~/containerization/fed/docker-compose/database
 sudo mysql -u root oai_db < oai_db2.sql
-
 
