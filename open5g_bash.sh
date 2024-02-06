@@ -579,3 +579,6 @@ sudo mysql -u root -e "create database oai_db;"
 cd ~/containerization/fed/docker-compose/database
 sudo mysql -u root oai_db < oai_db2.sql
 
+cd ~/containerization
+git clone https://github.com/joshuamoorexyz/oai_cn_configs
+
