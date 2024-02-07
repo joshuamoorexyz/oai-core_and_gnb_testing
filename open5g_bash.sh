@@ -471,8 +471,7 @@ rm -rf /var/lib/apt/lists/*
 
 ldconfig
 
-#COMMENT
-###################### BUILD spgwu_tiny IMAGE #########################
+###################### INSTALL AND BUILD UDF #########################
 # Set environment variables
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Europe/Paris
@@ -494,22 +493,10 @@ rm -rf /var/lib/apt/lists/*
 git config --global https.postBuffer 123289600
 git config --global http.sslverify false
 
-#cd into spgwu-tiny directory
-cd "$folder_path"/spgwu_tiny/build/scripts
+cd ~/containerization/upf/build/scripts
 
-# Installing all the needed libraries/packages to build and run SPGWU-TINY
-apt-get update
-apt-get install -y \
-    libdouble-conversion-dev \
-    libgoogle-glog-dev \
-    libgflags-dev \
-    libiberty-dev \
-    liblz4-dev \
-    liblzma-dev \
-    binutils-dev
-
-./build_spgwu --install-deps --force
-./build_spgwu --clean --Verbose --build-type Release --jobs && ldconfig
+./build_udf --install-deps --force
+./build_udf --clean --Verbose --build-type Release --jobs && ldconfig
 
 
 # Set environment variables
@@ -521,26 +508,28 @@ apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes
 
 # Install debug tools and mandatory libraries
+
 DEBIAN_FRONTEND=noninteractive apt-get install --yes \
-  python3 \
-  python3-jinja2 \
-  tzdata \
-  psmisc \
-  net-tools \
-  iproute2 \
-  ethtool \
-  iptables \
-  netbase \
-  libgssapi-krb5-2 \
-  libldap-2.?-? \
-  libgoogle-glog0v5 \
-  libdouble-conversion? \
-  libconfig++9v5 \
-  librtmp1 \
-  libpsl5 \
-  libnghttp2-14 \
-  libcurl?-gnutls \
-  libboost-thread1.7?.0
+      tzdata \
+      psmisc \
+      net-tools \
+      iproute2 \
+      ethtool \
+      arping \
+      sudo \
+      iptables \
+      netbase \
+      libasan? \
+      libgssapi-krb5-2 \
+      libldap-2.?-? \
+      libgoogle-glog0v5 \
+      libdouble-conversion3 \
+      libconfig++9v5 \
+      librtmp1 \
+      libpsl5 \
+      libnghttp2-14 \
+      libcurl?-gnutls \
+      libboost-thread1.7?.0
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
@@ -557,9 +546,8 @@ ldconfig
 
 
 
+##################### INSTALL AND BUILD MYSQL ##################
 
-# Install MySQL server
-#
 sudo apt-get update -y
 sudo apt-get install -y mysql-server
     

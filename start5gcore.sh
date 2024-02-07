@@ -3,7 +3,7 @@ cd ~/containerization
 mkdir -p logs
 
 # Start nrf
-(cd logs && touch nrf.log udr.log udm.log ausf.log amf.log smf.log spgwu.log mysql.log)
+(cd logs && touch nrf.log udr.log udm.log ausf.log amf.log smf.log upf.log mysql.log)
 
 # Start asterisk ims
 nohup asterisk -fp &
@@ -38,8 +38,8 @@ sleep 5
 nohup ./smf/build/smf/build/smf -c ./oai_cn_configs/smf/config.yaml -o > ./logs/smf.log &
 sleep 5
 
-# Start spgwu
-nohup ./spgwu_tiny/build/spgw_u/build/spgwu -c ./oai_cn_configs/spgwu/spgw_u.conf -o > ./logs/spgwu.log &
+# Start upf
+nohup ./upf/build/upf/build/upf -c ./oai_cn_configs/upf/config.yaml -o > ./logs/upf.log &
 sleep 5
 
 # Make start_trf.sh executable
