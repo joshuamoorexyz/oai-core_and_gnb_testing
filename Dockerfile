@@ -14,6 +14,7 @@ COPY buildgnb.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/open5g_bash.sh
 RUN chmod +x /usr/local/bin/start5gcore.sh
 RUN chmod +x /usr/local/bin/buildgnb.sh
+RUN chmod +x /usr/local/bin/start_trf.sh
 
 
 #build core network services

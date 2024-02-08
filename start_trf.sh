@@ -27,13 +27,12 @@ rm -rf /var/lib/apt/lists/*
 
 # move to trf dircetory
 cd ~/containerization/fed/ci-scripts
+mkdir -p ~/containerization/logs
+touch ~/containerization/logs/trf.log
 
 # Copy entrypoint script
 cp trfgen_entrypoint.sh /tmp/
 
 # Set entrypoint and default command
 chmod +x /tmp/trfgen_entrypoint.sh
-/tmp/trfgen_entrypoint.sh
-
-# Keep the script running indefinitely
-sleep infinity
+nohup /tmp/trfgen_entrypoint.sh > ~containerization/logs/trf.log &
