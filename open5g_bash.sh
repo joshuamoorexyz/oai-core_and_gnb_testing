@@ -471,7 +471,7 @@ rm -rf /var/lib/apt/lists/*
 
 ldconfig
 
-###################### INSTALL AND BUILD UDF #########################
+###################### INSTALL AND BUILD UPF #########################
 # Set environment variables
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Europe/Paris
@@ -495,8 +495,8 @@ git config --global http.sslverify false
 
 cd ~/containerization/upf/build/scripts
 
-./build_udf --install-deps --force
-./build_udf --clean --Verbose --build-type Release --jobs && ldconfig
+./build_upf --install-deps --force
+./build_upf --clean --Verbose --build-type Release --jobs && ldconfig
 
 
 # Set environment variables
