@@ -55,6 +55,7 @@ apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes
 DEBIAN_FRONTEND=noninteractive apt-get install --yes \
     tzdata \
+    gcc-multilib \
     psmisc \
     net-tools \
     tcpdump \
@@ -495,6 +496,7 @@ git config --global http.sslverify false
 
 cd ~/containerization/upf/build/scripts
 
+apt-get update
 ./build_upf --install-deps --force
 ./build_upf --clean --Verbose --build-type Release --jobs && ldconfig
 
